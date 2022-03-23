@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "navbar.html"%}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  {% load static %}
+        <link rel="stylesheet" href="{% static 'boostrap/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'font/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
+
+</head>
+<body id="am">
+<style>
+
+</style>
+<div class="container-fluid" style="margin-top:50px;">
+        <div class="col-md-offset-3 col-md-6 ">
+
+            {% if user.is_authenticated %}
+            <h3 class="page-header text-primary text-center" style="color:black"><i class="fa fa-database"> Welcome:{{user.username}}</i></h3><br>
+            {% else %}
+            <h3> HOME Page </h3>
+            {% endif %}
+            <div class="col-md-6 pull-right well">
+                <table >
+                    <tr>
+                        <th><input type="text" name="search" id="search" placeholder="search" class="form-control"></th>
+                        <th><a class="btn btn-success btn-block" href="/insert/">Insert</a></th>
+                    </tr>
+                </table>
+            </div>
+
+
+            {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error'%}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            <table class="table table-bordered well" >
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                {% for mydata in data %}
+                <tbody id="mytable">
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{mydata.name}}</td>
+                        <td>{{mydata.age}}</td>
+                        <td>{{mydata.address}}</td>
+                        <td>{{mydata.contact}}</td>
+                        <td>{{mydata.email}}</td>
+                        <td class="center"><a class="btn btn-primary" href="/update/{{mydata.id}}">Update</a></td>
+                        <td class="center"><a class="btn btn-danger" href="/delete/{{mydata.id}}">Delete</a></td>
+                    </tr>
+                </tbody>
+                {%endfor%}
+            </table>
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $("document").ready(function(){
+        $("#search").keyup(function(){
+            var value=$(this).val().toLowerCase()
+            $("#mytable tr").filter(function(){
+                $(this).toggle($(this).text().toLowerCase().indexOf(value)>-1);
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $(".alert").hide(4000);
+    });
+</script>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top color">
+                <div class="container">
+                <div class="navbar-header">
+                <a href="#" class="navbar-brand"><i class="fa fa-users">Student Management project</i></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'Profile'%}"><i class="fa fa-users"> Details</i></a></li>
+                        <li><a href="{% url 'Logout'%}"><i class="fa fa-user"> Logout</i></a></li>
+                    {% else %}
+                        <li><a href="{% url 'Login'%}"><i class="fa fa-user"> Login</i></a></li>
+                        <li><a href="{% url 'Insert'%}"><i class="fa fa-users"> Insert</i></a></li>
+                    {% endif %}
+                </ul>
+                </div>
+            </nav>
+
+</body>
+</html>

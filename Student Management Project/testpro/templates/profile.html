@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'boostrap/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'font/css/all.min.css'%}">
+        <link rel="stylesheet" href="{% static 'css/pro.css'%}">
+        <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <style>
+    body{
+    background: url("/static/image/b1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top color">
+                <div class="container">
+                <div class="navbar-header">
+                <a href="#" class="navbar-brand"><i class="fa fa-users"> Student Data</i></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'Home'%}"><i class="fa fa-home"> Home</i></a></li>
+                </ul>
+                </div>
+            </nav>
+
+<div class="container-fluid" style="margin-top:200px;">
+        <div class="col-md-offset-4 col-md-4 well" >
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-offset-4 col-md-4">
+    <table class="table table-bordered well" >
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                {% for mydata in data %}
+                <tbody id="mytable">
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{mydata.name}}</td>
+                        <td>{{mydata.age}}</td>
+                        <td>{{mydata.address}}</td>
+                        <td>{{mydata.contact}}</td>
+                        <td>{{mydata.email}}</td>
+                    </tr>
+                </tbody>
+                {%endfor%}
+            </table>
+        </div>
+</div>
+</body>
+</html>
+
+
